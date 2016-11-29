@@ -13,9 +13,12 @@ app.get('/', function(req, res){
 //  });
 //})
 
+io.emit('some event', { for: 'everyone' });
+
+// to exclude someone from seeing something, use broadcast flag
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
+    io.emit('chat message', msg);
   });
 });
 
